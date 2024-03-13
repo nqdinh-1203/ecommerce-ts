@@ -6,12 +6,12 @@ import helmet from "helmet";
 import compression = require("compression");
 import Database from "./db/init.mongodb";
 import { check_overload } from "./helpers/check_connect";
-
+import { config } from "./configs/config.mongodb";
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = config.app.port;
 
 // Apply middleware into server
 app.use(morgan("dev"));

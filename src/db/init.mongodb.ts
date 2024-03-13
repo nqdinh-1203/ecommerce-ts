@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 import { count_connect } from "../helpers/check_connect"
+import { config } from '../configs/config.mongodb';
 
-const connectString: string = "mongodb://127.0.0.1:27017/shopdev";
+const { host, name, port } = config.db;
+const connectString: string = `mongodb://${host}:${port}/${name}`;
 
 export default class Database {
     private static instance: Database;
@@ -15,7 +17,7 @@ export default class Database {
 
         mongoose
             .connect(connectString)
-            .then((_) => console.log("Connected Mongodb Success, ", count_connect()))
+            .then((_) => console.log("Connected Mongodb Success, ", () => count_connect()))
             .catch((err) => console.log("Error Connect!"));
     }
 
